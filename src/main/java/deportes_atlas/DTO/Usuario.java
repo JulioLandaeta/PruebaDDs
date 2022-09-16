@@ -1,0 +1,178 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package deportes_atlas.DTO;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import deportes_atlas.validaciones.validacion;
+public class Usuario {
+    private int ID;
+    private String PrimerNombre;
+    private String SegundoNombre;
+    private String ApellidoPaterno;
+    private String ApellidoMaterno;
+    private int Rut;
+    private String Dv;
+    private String FechaNacimiento;
+    private int Telefono;
+    private String NombreUsuario;
+    private String Email;
+    private String Password;   
+
+    public Usuario() {
+        this.ID = 0;
+        this.PrimerNombre = "";
+        this.SegundoNombre = "";
+        this.ApellidoPaterno = "";
+        this.ApellidoMaterno = "";
+        this.Rut = 0;
+        this.Dv = "";
+        this.FechaNacimiento = "";
+        this.Telefono = 0;
+        this.NombreUsuario = "";
+        this.Email = "";
+        this.Password = "";
+    }
+    
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public String getPrimerNombre() {
+        return PrimerNombre;
+    }
+
+    public void setPrimerNombre(String PrimerNombre) {
+        if(PrimerNombre.length()>4){
+            this.PrimerNombre = PrimerNombre;
+        }
+        else{
+            System.out.println("Nombre no valid, debe de tener al menos 4 caracteres");
+        }
+            
+    }
+
+    public String getSegundoNombre() {
+        
+        return SegundoNombre;
+    }
+
+    public void setSegundoNombre(String SegundoNombre) {
+        this.SegundoNombre = SegundoNombre;
+    }
+
+    public String getApellidoPaterno() {
+        return ApellidoPaterno;
+    }
+
+    public void setApellidoPaterno(String ApellidoPaterno) {
+        this.ApellidoPaterno = ApellidoPaterno;
+    }
+
+    public String getApellidoMaterno() {
+        return ApellidoMaterno;
+    }
+
+    public void setApellidoMaterno(String ApellidoMaterno) {
+        if(PrimerNombre.length()>4){
+            this.ApellidoMaterno = ApellidoMaterno;
+        }
+        else{
+            System.out.println("Apellido no validado debe tener al menos 4 caracteres");
+        }
+        
+    }
+
+    public int getRut() {
+        return Rut;
+    }
+
+    public void setRut(int Rut) {
+         this.Rut = Rut;
+    }
+
+    public String getDv() {
+        return Dv;
+    }
+
+    public void setDv(String Dv) {
+        this.Dv = Dv;
+    }
+
+    public String getFechaNacimiento() {
+        
+        return Edad();
+    }
+
+    public void setFechaNacimiento(String FechaNacimiento) {
+        this.FechaNacimiento = FechaNacimiento;
+    }
+
+    public int getTelefono() {
+        return Telefono;
+    }
+
+    public void setTelefono(int Telefono) {
+        
+        this.Telefono = Telefono;
+    }
+
+    public String getNombreUsuario() {
+        
+        return NombreUsuario;
+    }
+
+    public void setNombreUsuario(String NombreUsuario) {
+        if(NombreUsuario.length()>=4){
+            this.NombreUsuario = NombreUsuario;
+        }
+        else{
+            System.out.println("nombre no valido");
+        }
+    }
+
+    public String getEmail() {
+        
+        return Email;
+    }
+
+    public void setEmail(String Email) {
+        if(Email.contains("@") && (Email.contains(".com") || Email.contains(".cl")) && Email.length()>4){
+            this.Email = Email;
+        }
+        else{
+            System.out.println("correo no valido, debe contener un '@' y el '.com' y menos de 4 caracteres");
+        }
+        
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String Password) {
+        if(!validacion.ValidaPassword(Password)){
+            System.out.println("Password ingresada no valida");
+        }
+        else{
+            this.Password = Password;
+            System.out.println("Password Ingresada correctamente");
+        }       
+    }
+    public String Edad(){
+        DateTimeFormatter Formato = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDate FechaActual = LocalDate.now();
+        LocalDate FechaNacFormato = LocalDate.parse(this.FechaNacimiento, Formato);
+        Period Edad = Period.between(FechaNacFormato, FechaActual);
+        return "La edad es: "+Edad.getYears()+" años ";
+    }
+    
+    
+    
+}
