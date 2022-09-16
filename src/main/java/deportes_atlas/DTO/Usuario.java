@@ -5,8 +5,9 @@
 package deportes_atlas.DTO;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Date;
 import java.time.format.DateTimeFormatter;
-import deportes_atlas.validaciones.validacion;
+import  deportes_atlas.Metodos.Metodo;
 public class Usuario {
     private int ID;
     private String PrimerNombre;
@@ -22,7 +23,7 @@ public class Usuario {
     private String Password;   
 
     public Usuario() {
-        this.ID = 0;
+        this.ID = 1000;
         this.PrimerNombre = "";
         this.SegundoNombre = "";
         this.ApellidoPaterno = "";
@@ -41,6 +42,7 @@ public class Usuario {
     }
 
     public void setID(int ID) {
+        
         this.ID = ID;
     }
 
@@ -49,11 +51,11 @@ public class Usuario {
     }
 
     public void setPrimerNombre(String PrimerNombre) {
-        if(PrimerNombre.length()>4){
+        if(PrimerNombre.length()>=4){
             this.PrimerNombre = PrimerNombre;
         }
         else{
-            System.out.println("Nombre no valid, debe de tener al menos 4 caracteres");
+            System.out.println("Nombre no valida debe tener al menos 4 caracteres");
         }
             
     }
@@ -72,7 +74,12 @@ public class Usuario {
     }
 
     public void setApellidoPaterno(String ApellidoPaterno) {
-        this.ApellidoPaterno = ApellidoPaterno;
+        if(ApellidoPaterno.length()>4){
+            this.ApellidoPaterno = ApellidoPaterno;
+        }
+        else{
+            System.out.println("Apellido no validado debe tener al menos 4 caracteres");
+        }
     }
 
     public String getApellidoMaterno() {
@@ -80,7 +87,7 @@ public class Usuario {
     }
 
     public void setApellidoMaterno(String ApellidoMaterno) {
-        if(PrimerNombre.length()>4){
+        if(ApellidoMaterno.length()>4){
             this.ApellidoMaterno = ApellidoMaterno;
         }
         else{
@@ -119,8 +126,13 @@ public class Usuario {
     }
 
     public void setTelefono(int Telefono) {
+        if(String.valueOf(Telefono).length()>=8 && String.valueOf(Telefono).contains("56")){
+            this.Telefono = Telefono;
+        }
+        else{
+            System.out.println("Telefono debe tener 56 y mas de 8 caracteres");
+        }
         
-        this.Telefono = Telefono;
     }
 
     public String getNombreUsuario() {
@@ -147,7 +159,7 @@ public class Usuario {
             this.Email = Email;
         }
         else{
-            System.out.println("correo no valido, debe contener un '@' y el '.com' y menos de 4 caracteres");
+            System.out.println("El correo debe contener un '@' y el '.com' ademas, debe tener al menos 4 caracteres");
         }
         
     }
@@ -157,22 +169,23 @@ public class Usuario {
     }
 
     public void setPassword(String Password) {
-        if(!validacion.ValidaPassword(Password)){
-            System.out.println("Password ingresada no valida");
+        Metodo met = new Metodo();
+        if(met.ValidaPassword(Password)){
+            this.Password = Password;
         }
         else{
-            this.Password = Password;
-            System.out.println("Password Ingresada correctamente");
+            System.out.println("Password ingresada no valida");
         }       
     }
     public String Edad(){
-        DateTimeFormatter Formato = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDate FechaActual = LocalDate.now();
+        DateTimeFormatter Formato = DateTimeFormatter.ofPattern("dd/mm/yyyy");
         LocalDate FechaNacFormato = LocalDate.parse(this.FechaNacimiento, Formato);
         Period Edad = Period.between(FechaNacFormato, FechaActual);
-        return "La edad es: "+Edad.getYears()+" años ";
+        return "La edad es: "+Edad.getYears()+" anios ";
     }
     
     
     
 }
+

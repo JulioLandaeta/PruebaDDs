@@ -2,10 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package deportes_atlas.validaciones;
-public class validacion{
+package deportes_atlas.Metodos;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.time.LocalDateTime;
+
+public class Metodo{
     
-    public static boolean ValidaPassword(String pass){
+public static boolean ValidaPassword(String pass){
         boolean validaMayu = false;
         boolean validaNum = false;
         if(pass.length()>5){
@@ -17,7 +23,12 @@ public class validacion{
                     validaNum = true;
                 }
             }
-            return validaMayu==true && validaNum==true;
+            if(validaMayu==true && validaNum==true){
+                return true;
+            }
+            else{
+                return false;
+            }
         }
         else{
             return false;
@@ -47,4 +58,15 @@ public class validacion{
         return Validacion;
     }
     
+    /**
+     *
+     * @param fecha
+     * @return
+     */
+    public static LocalDate CambiarFormato(String fecha){
+        LocalDate FechaActual = LocalDate.now();
+        DateTimeFormatter Formato = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDate FecFormat = LocalDate.parse(fecha, Formato);
+        return FecFormat;
+    }
 }

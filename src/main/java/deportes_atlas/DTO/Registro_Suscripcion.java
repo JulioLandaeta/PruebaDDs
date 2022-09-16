@@ -4,26 +4,27 @@
  */
 package deportes_atlas.DTO;
 import java.util.Date;
+import java.time.LocalDateTime;
 public class Registro_Suscripcion {
-    private Date FechaInicio;
+    private int Numero;
+    private String FechaInicio;
     private int ValorSuscripcion;
     private int Abono;
     private String Club;
     private String Usuario;
 
     public Registro_Suscripcion() {
-        this.FechaInicio = new Date();
+        this.FechaInicio = "";
         this.ValorSuscripcion = 0;
         this.Abono = 0;
         this.Club = "";
         this.Usuario = "";
     }
-
-    public Date getFechaInicio() {
+    public String getFechaInicio() {
         return FechaInicio;
     }
 
-    public void setFechaInicio(Date FechaInicio) {
+    public void setFechaInicio(String FechaInicio) {
         this.FechaInicio = FechaInicio;
     }
 
@@ -57,6 +58,14 @@ public class Registro_Suscripcion {
 
     public void setUsuario(String Usuario) {
         this.Usuario = Usuario;
+    }
+
+    public int getNumero() {
+        return Numero;
+    }
+
+    public void setNumero(int Numero) {
+        this.Numero = Numero;
     }
     
     
